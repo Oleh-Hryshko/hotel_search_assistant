@@ -9,6 +9,7 @@ The app is local-first and uses a free local LLM through [Ollama](https://ollama
 - Reads the system prompt, model and generation parameters from `config/hotel_assistant_config.json`.
 - Extracts `destination`, `check_in_date`, `check_out_date`, `guests` and allowed hotel filters.
 - Keeps the full conversation context during the interactive session, so commands like `remove breakfast` or short replies like `yes` can update earlier preferences.
+- Keeps the current filter state and merges updates into it; removing a boolean filter deletes that key from `filters`.
 - Prints the final hotel search filter payload when you exit the chat.
 - Checks extracted stay dates and asks for future dates if the check-in date has already passed.
 - Supports Ollama and OpenAI-compatible chat completion endpoints.
@@ -16,13 +17,7 @@ The app is local-first and uses a free local LLM through [Ollama](https://ollama
 
 ## Examples of communication
 
-![hotel_search_assistant_01.png](hotel_search_assistant_01.png)
-
-![hotel_search_assistant_02.png](hotel_search_assistant_02.png)
-
-![hotel_search_assistant_03.png](hotel_search_assistant_03.png)
-
-![hotel_search_assistant_04.png](hotel_search_assistant_04.png)
+![hotel_search_assistant.png](hotel_search_assistant.png)
 
 ## Quick Start
 
@@ -55,10 +50,7 @@ Run the app from the project root:
 Interactive commands:
 
 ```text
-filter          show the current hotel search filter payload
 filters         show the current hotel search filter payload
-show filter     show the current hotel search filter payload
-show filters    show the current hotel search filter payload
 exit            print the final filter payload and close the chat
 quit            print the final filter payload and close the chat
 q               print the final filter payload and close the chat
